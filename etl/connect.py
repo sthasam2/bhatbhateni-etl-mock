@@ -1,3 +1,7 @@
+"""
+Class for creating snowflake connections
+"""
+
 from constant import *
 from utils import create_connection
 
@@ -28,12 +32,12 @@ class Connection:
         self.get_info()
 
     def close_connection(self):
-        """ """
+        """Close the snowflake connections"""
 
         self.db_ctx.close() if self.db_ctx else None
 
     def get_info(self):
-        """"""
+        """Get snowflake connection information"""
 
         return dict(
             user=self.user,

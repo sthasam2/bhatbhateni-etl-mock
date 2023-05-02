@@ -1,3 +1,8 @@
+"""
+Utility functions for ETL
+"""
+
+
 import os
 import time
 
@@ -10,6 +15,12 @@ en_cfg = dotenv.dotenv_values("./.env")
 
 
 def try_except_decorator(function):
+    """
+    Decorator function for wrapping a given function inside
+    try except
+    as well as console logging
+    """
+
     def wrapper(*args, **kwargs):
         try:
             print(f"\n[{time.asctime()}]")
@@ -30,6 +41,7 @@ def get_env_var(var_name: str) -> str:
     """
     Get the environment variable from your os or return an exception
     """
+
     try:
         if en_cfg.get(var_name):
             print("dotenv", var_name)
@@ -59,7 +71,10 @@ def create_connection(
     warehouse: str = None,
     schema: str = None,
 ):
-    """ """
+    """
+    Create database connection
+    """
+
     connection = snowflake.connector.connect(
         user=user,
         password=password,
@@ -78,13 +93,11 @@ def export_schema_table_to_csv(
     """
     Export schema.table to csv in desired location using a database connection
     """
+
     file_location = os.path.join(csv_dir_location, f"{table}.csv").replace("\\", "/")
-
     cur = ctx.cursor()
-
     cur.execute(f"SELECT * FROM {schema}.{table}")
     cur.fetch_pandas_all().to_csv(file_location, index=False)
-
     print(f"Exported '{schema}.{table}' to '{table}.csv' successfully!")
 
 

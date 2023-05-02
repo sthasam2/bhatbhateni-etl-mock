@@ -13,6 +13,10 @@ from utils import (
 
 
 class Product:
+    """
+    Class for representing product table
+    """
+
     product_csv_path: str = os.path.join(CSV_PATH, "product.csv").replace("\\", "/")
 
     db_ctx: SnwfConn = None
@@ -216,7 +220,7 @@ class Product:
             FROM
                 tmp.extended_dwh_d_product_lu tgt
                 RIGHT JOIN tmp.extended_tmp_d_product_lu src ON (
-                    tgt.product_id = src.id -- tgt and src with product id equal
+                    tgt.product_id = src.id
                 ),
                 (SELECT NVL(MAX(product_ky), 0) max_ky from dwh.dwh_d_product_lu) _max,
                 TABLE (getnextval (seq)) s

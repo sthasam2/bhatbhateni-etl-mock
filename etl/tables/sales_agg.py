@@ -12,7 +12,9 @@ from utils import (
 
 
 class SalesAgg:
-    """"""
+    """
+    Class for representing Sales Aggregation table
+    """
 
     db_ctx: SnwfConn = None
 

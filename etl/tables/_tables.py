@@ -1,3 +1,7 @@
+"""
+Barrel file for all table imports
+"""
+
 from tables.category import Category
 from tables.country import Country
 from tables.customer import Customer

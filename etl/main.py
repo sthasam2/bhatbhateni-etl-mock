@@ -1,3 +1,7 @@
+"""
+Main file point for executing the script
+"""
+
 from dotenv import load_dotenv
 
 import tasks
@@ -8,8 +12,6 @@ from utils import *
 
 load_dotenv()
 ctx = None
-if not os.path.exists(CSV_PATH):
-    os.makedirs(CSV_PATH)
 
 
 ################################
@@ -46,7 +48,7 @@ if __name__ == "__main__":
         # ############################
 
         # DOWNLOAD FILES
-        # tasks.export_transaction_tables_to_csv(ctx)
+        tasks.export_transaction_tables_to_csv(ctx)
 
         # CREATE STG TMP TGT Schemas
         tasks.create_stg_tmp_tgt_schemas(ctx)

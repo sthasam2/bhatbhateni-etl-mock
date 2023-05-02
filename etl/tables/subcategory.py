@@ -13,7 +13,9 @@ from utils import (
 
 
 class Subcategory:
-    """"""
+    """
+    Class for representing Subcategory table
+    """
 
     subcategory_csv_path: str = os.path.join(CSV_PATH, "subcategory.csv").replace(
         "\\", "/"

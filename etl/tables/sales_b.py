@@ -13,7 +13,9 @@ from utils import (
 
 
 class Sales:
-    """"""
+    """
+    Class for representing Sales Transaction Base table
+    """
 
     sales_csv_path: str = os.path.join(CSV_PATH, "sales.csv").replace("\\", "/")
     db_ctx: SnwfConn = None

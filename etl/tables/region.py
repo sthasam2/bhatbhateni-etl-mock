@@ -13,7 +13,9 @@ from utils import (
 
 
 class Region:
-    """"""
+    """
+    Class for representing region table
+    """
 
     region_csv_path: str = os.path.join(CSV_PATH, "region.csv").replace("\\", "/")
     db_ctx: SnwfConn = None
