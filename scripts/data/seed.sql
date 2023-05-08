@@ -1,83 +1,92 @@
 -- CREATE DATABASE BHATBHATENI;
-Use DATABASE bhatbhateni_etl;
+USE DATABASE bhatbhateni_etl;
 
-CREATE schema TRANSACTIONS;
 
-CREATE
-OR REPLACE TABLE COUNTRY (
-    id NUMBER,
-    country_desc VARCHAR(256),
-    PRIMARY KEY (id)
-);
+CREATE SCHEMA TRANSACTIONS;
 
-CREATE
-OR REPLACE TABLE REGION (
-    id NUMBER,
-    country_id NUMBER,
-    region_desc VARCHAR(256),
-    PRIMARY KEY (id),
-    FOREIGN KEY (country_id) REFERENCES COUNTRY(id)
-);
 
-CREATE
-OR REPLACE TABLE STORE (
-    id NUMBER,
-    region_id NUMBER,
-    store_desc VARCHAR(256),
-    PRIMARY KEY (id),
-    FOREIGN KEY (region_id) REFERENCES REGION(id)
-);
+CREATE OR REPLACE TABLE
+    COUNTRY (
+        id NUMBER,
+        country_desc VARCHAR (256),
+        PRIMARY KEY (id)
+    );
 
-CREATE
-OR REPLACE TABLE CATEGORY (
-    id NUMBER,
-    category_desc VARCHAR(1024),
-    PRIMARY KEY (id)
-);
 
-CREATE
-OR REPLACE TABLE SUBCATEGORY (
-    id NUMBER,
-    category_id NUMBER,
-    subcategory_desc VARCHAR(256),
-    PRIMARY KEY (id),
-    FOREIGN KEY (category_id) REFERENCES CATEGORY(id)
-);
+CREATE OR REPLACE TABLE
+    REGION (
+        id NUMBER,
+        country_id NUMBER,
+        region_desc VARCHAR (256),
+        PRIMARY KEY (id),
+        FOREIGN KEY (country_id) REFERENCES COUNTRY (id)
+    );
 
-CREATE
-OR REPLACE TABLE PRODUCT (
-    id NUMBER,
-    subcategory_id NUMBER,
-    product_desc VARCHAR(256),
-    PRIMARY KEY (id),
-    FOREIGN KEY (subcategory_id) REFERENCES SUBCATEGORY(id)
-);
 
-CREATE
-OR REPLACE TABLE CUSTOMER (
-    id NUMBER,
-    customer_first_name VARCHAR(256),
-    customer_middle_name VARCHAR(256),
-    customer_last_name VARCHAR(256),
-    customer_address VARCHAR(256),
-    PRIMARY KEY (id)
-);
+CREATE OR REPLACE TABLE
+    STORE (
+        id NUMBER,
+        region_id NUMBER,
+        store_desc VARCHAR (256),
+        PRIMARY KEY (id),
+        FOREIGN KEY (region_id) REFERENCES REGION (id)
+    );
 
-CREATE
-OR REPLACE TABLE SALES (
-    id NUMBER,
-    store_id NUMBER NOT NULL,
-    product_id NUMBER NOT NULL,
-    customer_id NUMBER,
-    transaction_time TIMESTAMP,
-    quantity NUMBER,
-    amount NUMBER(20, 2),
-    discount NUMBER(20, 2),
-    PRIMARY KEY (id),
-    FOREIGN KEY (store_id) REFERENCES STORE(id),
-    FOREIGN KEY (product_id) REFERENCES PRODUCT(id),
-    FOREIGN KEY (customer_id) REFERENCES CUSTOMER(id)
-);
+
+CREATE OR REPLACE TABLE
+    CATEGORY (
+        id NUMBER,
+        category_desc VARCHAR (1024),
+        PRIMARY KEY (id)
+    );
+
+
+CREATE OR REPLACE TABLE
+    SUBCATEGORY (
+        id NUMBER,
+        category_id NUMBER,
+        subcategory_desc VARCHAR (256),
+        PRIMARY KEY (id),
+        FOREIGN KEY (category_id) REFERENCES CATEGORY (id)
+    );
+
+
+CREATE OR REPLACE TABLE
+    PRODUCT (
+        id NUMBER,
+        subcategory_id NUMBER,
+        product_desc VARCHAR (256),
+        PRIMARY KEY (id),
+        FOREIGN KEY (subcategory_id) REFERENCES SUBCATEGORY (id)
+    );
+
+
+CREATE OR REPLACE TABLE
+    CUSTOMER (
+        id NUMBER,
+        customer_first_name VARCHAR (256),
+        customer_middle_name VARCHAR (256),
+        customer_last_name VARCHAR (256),
+        customer_address VARCHAR (256),
+        PRIMARY KEY (id)
+    );
+
+
+CREATE OR REPLACE TABLE
+    SALES (
+        id NUMBER,
+        store_id NUMBER NOT NULL,
+        product_id NUMBER NOT NULL,
+        customer_id NUMBER,
+        transaction_time TIMESTAMP,
+        quantity NUMBER,
+        amount NUMBER (20, 2),
+        discount NUMBER (20, 2),
+        PRIMARY KEY (id),
+        FOREIGN KEY (store_id) REFERENCES STORE (id),
+        FOREIGN KEY (product_id) REFERENCES PRODUCT (id),
+        FOREIGN KEY (customer_id) REFERENCES CUSTOMER (id)
+    );
 
 
 --Insert into Country
@@ -86,6 +95,7 @@ INSERT INTO
 VALUES
     (1, 'Nepal'),
     (2, 'India');
+
 
 --Insert into Region
 INSERT INTO
@@ -96,6 +106,7 @@ VALUES
     (3, 2, 'Punjab'),
     (4, 2, 'Bangalore');
 
+
 --insert into Store
 INSERT INTO
     Store
@@ -105,6 +116,7 @@ VALUES
     (3, 3, 'Bhatbhateni Chandigarh'),
     (4, 4, 'Bhatbhateni Jayanagar');
 
+
 --Insert into Categories
 INSERT INTO
     CATEGORY
@@ -112,6 +124,7 @@ VALUES
     (1, 'Garment'),
     (2, 'GROCERY'),
     (3, 'KitchenWares');
+
 
 --Insert into SubCategories
 INSERT INTO
@@ -126,6 +139,7 @@ VALUES
     (7, 3, 'Utensils'),
     (8, 3, 'Glassware'),
     (9, 3, 'ElectricAppliances');
+
 
 --Insert into Product
 INSERT INTO
@@ -150,6 +164,7 @@ VALUES
     (17, 7, 'Spoon'),
     (18, 3, 'Kids Jacket');
 
+
 --Insert into Customer
 INSERT INTO
     Customer
@@ -160,7 +175,6 @@ VALUES
     (4, 'Saurav', 'Muhammed', 'Ali', 'Banglore'),
     (5, 'Kannur', 'Lokesh', 'Rahul', 'Punjab'),
     (6, 'Mahendra', 'Singh', 'Dhoni', 'Chennai');
-
 
 
 INSERT INTO
